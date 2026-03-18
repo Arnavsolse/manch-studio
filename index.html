@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manch Studio — Premium Creative Studio, Pune</title>
+<meta name="description" content="Manch Studio — Pune's premium creative space for photographers, filmmakers, brands & podcasters. Koregaon Park, Pune.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ─── PALETTE ─── */
+:root{
+  --bg:       #F2F0EA;
+  --bg2:      #EAE7DF;
+  --bg3:      #E2DED4;
+  --accent:   #8E3B2F;
+  --accent2:  #722F24;
+  --accent-l: rgba(142,59,47,.10);
+  --accent-m: rgba(142,59,47,.20);
+  --accent-b: rgba(142,59,47,.30);
+  --black:    #1C1C1C;
+  --black2:   #2A2018;
+  --white:    #FFFFFF;
+  --muted:    #6B5F58;
+  --light:    #A8998E;
+  --border:   #D8D3C8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{background:#FFFFFF;color:var(--black);font-family:'Plus Jakarta Sans',sans-serif;overflow-x:hidden;cursor:none}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* ─── CURSOR ─── */
+.cursor{width:10px;height:10px;background:var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .25s,height .25s}
+.cursor-ring{width:34px;height:34px;border:1.5px solid var(--accent);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.35;transition:width .3s,height .3s,opacity .3s}
+.cursor.big{width:18px;height:18px}
+.cursor-ring.big{width:52px;height:52px;opacity:.12}
+
+/* ─── INTRO ─── */
+#intro{
+  position:fixed;inset:0;z-index:9000;
+  background:#180E09;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transition:opacity .9s ease,visibility .9s ease;overflow:hidden;
+}
+#intro.hide{opacity:0;visibility:hidden;pointer-events:none}
+#intro::before{
+  content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);width:700px;height:700px;
+  background:radial-gradient(circle,rgba(142,59,47,.18) 0%,transparent 65%);
+  pointer-events:none;animation:iPulse 2.8s ease-in-out infinite;
+}
+@keyframes iPulse{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.1)}}
+.ic{position:absolute;opacity:0;animation:icFade .6s .3s ease forwards}
+.ic.tl{top:28px;left:28px;width:56px;height:56px;border-top:2px solid rgba(142,59,47,.4);border-left:2px solid rgba(142,59,47,.4)}
+.ic.tr{top:28px;right:28px;width:56px;height:56px;border-top:2px solid rgba(142,59,47,.4);border-right:2px solid rgba(142,59,47,.4)}
+.ic.bl{bottom:28px;left:28px;width:56px;height:56px;border-bottom:2px solid rgba(142,59,47,.4);border-left:2px solid rgba(142,59,47,.4)}
+.ic.br{bottom:28px;right:28px;width:56px;height:56px;border-bottom:2px solid rgba(142,59,47,.4);border-right:2px solid rgba(142,59,47,.4)}
+@keyframes icFade{from{opacity:0;transform:scale(.6)}to{opacity:1;transform:scale(1)}}
+.il{position:absolute;height:1px;background:linear-gradient(90deg,transparent,rgba(142,59,47,.18),transparent);width:100%;opacity:0}
+.il:nth-child(1){top:28%;animation:ilSlide .8s .2s ease forwards}
+.il:nth-child(2){top:50%;animation:ilSlide .8s .4s ease forwards}
+.il:nth-child(3){top:72%;animation:ilSlide .8s .6s ease forwards}
+@keyframes ilSlide{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:scaleX(1)}}
+.intro-graphic{opacity:0;animation:iGraphic .9s .1s cubic-bezier(.16,1,.3,1) forwards;margin-bottom:28px}
+@keyframes iGraphic{from{opacity:0;transform:translateY(36px) scale(.82)}to{opacity:1;transform:translateY(0) scale(1)}}
+.intro-logo{font-family:'Playfair Display',serif;font-size:clamp(52px,9vw,88px);font-weight:900;color:var(--white);opacity:0;animation:iText .7s .5s cubic-bezier(.16,1,.3,1) forwards;letter-spacing:-3px;line-height:1;text-align:center}
+.intro-logo span{color:var(--accent);font-style:italic}
+.intro-tagline{font-size:clamp(11px,1.5vw,13px);letter-spacing:6px;text-transform:uppercase;color:rgba(255,255,255,.28);opacity:0;animation:iText .6s .75s cubic-bezier(.16,1,.3,1) forwards;margin-top:14px;text-align:center}
+@keyframes iText{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.intro-div{width:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent),transparent);opacity:0;animation:iLine .8s .9s ease forwards;margin:22px auto}
+@keyframes iLine{from{width:0;opacity:0}to{width:220px;opacity:1}}
+.intro-sub{font-size:11px;letter-spacing:3.5px;text-transform:uppercase;color:rgba(255,255,255,.2);opacity:0;animation:iText .5s 1.1s ease forwards;text-align:center}
+.intro-bar{width:260px;height:2px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden;opacity:0;animation:iText .4s 1.2s ease forwards;margin-top:28px}
+.intro-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent),#c4604f);width:0;animation:iFill 1.6s 1.2s cubic-bezier(.4,0,.2,1) forwards}
+@keyframes iFill{to{width:100%}}
+
+/* ─── PARTICLE CANVAS ─── */
+#pCanvas{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.22}
+
+/* ─── NAV ─── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:22px 6%;display:flex;justify-content:space-between;align-items:center;transition:background .45s,padding .35s,box-shadow .45s}
+nav.scrolled{background:rgba(242,240,234,.94);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);padding:14px 6%;box-shadow:0 1px 0 var(--border),0 8px 32px rgba(28,28,28,.06)}
+.logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.logo-icon{width:40px;height:40px;background:var(--black);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:16px;color:var(--accent);flex-shrink:0;transition:background .3s,color .3s}
+nav.scrolled .logo-icon{background:var(--accent);color:var(--white)}
+.logo-text{font-family:'Playfair Display',serif;font-weight:800;font-size:18px;color:var(--black);letter-spacing:-.5px;line-height:1.1}
+.logo-sub{display:block;font-size:9px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{color:var(--black);text-decoration:none;font-size:14px;font-weight:500;opacity:.6;transition:opacity .2s;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--accent);transition:width .3s}
+.nav-links a:hover{opacity:1}
+.nav-links a:hover::after{width:100%}
+.nav-cta{background:var(--accent)!important;color:var(--white)!important;padding:11px 22px!important;border-radius:6px;opacity:1!important;font-weight:600!important;font-size:13px!important;transition:background .3s,transform .2s,box-shadow .3s!important;min-height:42px;display:flex!important;align-items:center}
+.nav-cta::after{display:none!important}
+.nav-cta:hover{background:var(--accent2)!important;transform:translateY(-1px)!important;box-shadow:0 8px 24px rgba(142,59,47,.28)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;background:none;border:none;padding:4px}
+.hamburger span{display:block;width:22px;height:2px;background:var(--black);border-radius:2px;transition:.3s}
+.mob-nav{display:none;position:fixed;inset:0;background:rgba(242,240,234,.97);z-index:199;flex-direction:column;align-items:center;justify-content:center;gap:28px}
+.mob-nav.open{display:flex}
+.mob-nav a{color:var(--black);text-decoration:none;font-family:'Playfair Display',serif;font-size:28px;font-weight:700;transition:color .2s}
+.mob-nav a:hover{color:var(--accent)}
+.mob-close{position:absolute;top:24px;right:6%;font-size:26px;background:none;border:none;color:var(--black);cursor:none}
+
+/* ─── WAVE DIVIDERS ─── */
+.wave-div{display:block;width:100%;overflow:hidden;line-height:0;margin-bottom:-2px}
+.wave-div svg{display:block;width:100%;height:56px}
+
+/* ─── HERO ─── */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:130px 6% 80px;gap:60px;position:relative;overflow:hidden;background:#FFFFFF}
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none}
+.hero-orb.o1{top:-140px;right:-140px;width:600px;height:600px;background:radial-gradient(circle,rgba(142,59,47,.07),transparent 70%);animation:breathe 7s ease-in-out infinite}
+.hero-orb.o2{bottom:-80px;left:25%;width:300px;height:300px;background:radial-gradient(circle,rgba(142,59,47,.05),transparent 70%);animation:breathe 9s ease-in-out infinite reverse}
+@keyframes breathe{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+/* floating lens decor */
+.hdeco{position:absolute;pointer-events:none}
+.hdeco.d1{top:16%;left:3%;opacity:.07;animation:hf1 9s ease-in-out infinite}
+.hdeco.d2{bottom:20%;right:3%;opacity:.06;animation:hf2 11s ease-in-out infinite}
+.hdeco.d3{top:58%;left:46%;opacity:.05;animation:hf1 8s 2s ease-in-out infinite}
+@keyframes hf1{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(8deg)}}
+@keyframes hf2{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-12px) rotate(-6deg)}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--border);padding:8px 16px;border-radius:100px;font-size:11px;font-weight:700;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:28px;box-shadow:0 2px 12px rgba(28,28,28,.06)}
+.hero-badge::before{content:'✦';font-size:9px}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(40px,5.5vw,76px);font-weight:900;line-height:1.05;letter-spacing:-2px;color:var(--black);margin-bottom:24px}
+.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-sub{font-size:clamp(15px,1.5vw,17px);color:var(--muted);line-height:1.78;max-width:440px;margin-bottom:40px;font-weight:400}
+.hero-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.btn-primary{background:var(--black);color:var(--white);padding:16px 32px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:10px;min-height:52px;position:relative;overflow:hidden;transition:color .35s}
+.btn-primary::before{content:'';position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .38s cubic-bezier(.4,0,.2,1)}
+.btn-primary>*{position:relative;z-index:1}
+.btn-primary .arr{transition:transform .3s}
+.btn-primary:hover::before{transform:scaleX(1)}
+.btn-primary:hover .arr{transform:translateX(5px)}
+.btn-secondary{color:var(--black);text-decoration:none;font-size:14px;font-weight:500;opacity:.5;display:flex;align-items:center;gap:6px;min-height:52px;transition:opacity .2s,border-color .2s;border-bottom:1px solid transparent}
+.btn-secondary:hover{opacity:1;border-color:var(--black)}
+.hero-stats{display:flex;gap:28px;margin-top:44px;padding-top:28px;border-top:1px solid var(--border)}
+.stat-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--accent);line-height:1}
+.stat-label{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:.5px}
+.hero-right{position:relative;z-index:2;display:flex;justify-content:center;align-items:center}
+.hero-visual{width:100%;max-width:480px;aspect-ratio:3/4;border-radius:20px;overflow:hidden;position:relative;box-shadow:0 40px 100px rgba(28,28,28,.16)}
+.hero-visual img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease}
+.hero-visual:hover img{transform:scale(1.04)}
+.hero-visual::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(28,28,28,.45) 100%);z-index:1;pointer-events:none}
+.hero-tag{position:absolute;bottom:20px;left:18px;right:18px;z-index:2;background:rgba(242,240,234,.95);backdrop-filter:blur(20px);border-radius:12px;padding:15px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 8px 32px rgba(28,28,28,.1)}
+.hero-tag-icon{width:38px;height:38px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.hero-tag-text strong{color:var(--black);font-size:14px;display:block;font-weight:600}
+.hero-tag-text span{color:var(--muted);font-size:12px}
+.hero-float-badge{position:absolute;top:22px;right:-12px;background:var(--accent);color:var(--white);padding:13px 17px;border-radius:12px;text-align:center;font-family:'Playfair Display',serif;font-weight:900;font-size:18px;line-height:1.2;z-index:3;box-shadow:0 12px 32px rgba(142,59,47,.38)}
+.hero-float-badge small{display:block;font-size:9px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;letter-spacing:2px;margin-top:4px}
+
+/* ─── MARQUEE ─── */
+.mq-wrap{padding:15px 0;overflow:hidden;background:var(--black);border-top:3px solid var(--accent)}
+.mq-track{display:flex;width:max-content;animation:mq 24s linear infinite}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.mq-item{display:flex;align-items:center;gap:8px;white-space:nowrap;padding:0 34px;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.38)}
+.mq-item .dot{width:4px;height:4px;background:var(--accent);border-radius:50%;flex-shrink:0}
+.mq-item strong{color:var(--white)}
+
+/* ─── STAT BAND ─── */
+.stat-band{background:var(--accent);padding:56px 6%;position:relative;overflow:hidden}
+.stat-band::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.1),transparent 50%,rgba(0,0,0,.08));pointer-events:none}
+.sb-grid{display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:1}
+.sb-item{text-align:center;padding:0 24px;border-right:1px solid rgba(255,255,255,.2)}
+.sb-item:last-child{border-right:none}
+.sb-val{display:flex;align-items:baseline;justify-content:center;gap:4px;line-height:1}
+.sb-num{font-family:'Playfair Display',serif;font-size:clamp(38px,4.5vw,62px);font-weight:900;color:var(--white);line-height:1}
+.sb-suffix{font-family:'Playfair Display',serif;font-size:clamp(20px,2.2vw,32px);font-weight:700;color:rgba(255,255,255,.85);line-height:1}
+.sb-lbl{font-size:11px;color:rgba(255,255,255,.68);letter-spacing:2.5px;text-transform:uppercase;margin-top:12px;font-weight:600}
+
+/* ─── GLOBAL SMOOTHNESS ─── */
+html{scroll-behavior:smooth;overflow-x:hidden;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+*{transition-timing-function:cubic-bezier(.16,1,.3,1)}
+img{transition:transform .6s cubic-bezier(.4,0,.2,1),filter .4s ease;will-change:transform}
+a,button{transition:color .25s ease,background .25s ease,border-color .25s ease,box-shadow .3s ease,transform .3s ease;-webkit-tap-highlight-color:transparent}
+section{padding:100px 6%}
+.stag{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.stag::before{content:'';width:20px;height:2px;background:var(--accent);border-radius:2px}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,54px);font-weight:900;line-height:1.1;letter-spacing:-.5px;color:var(--black);margin-bottom:16px}
+.stitle span{color:var(--accent);font-style:italic}
+.ssub{font-size:16px;color:var(--muted);line-height:1.75;max-width:520px;font-weight:400}
+
+/* ─── BENTO SERVICES ─── */
+.svc-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:52px;flex-wrap:wrap;gap:20px}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.bc{background:#FFFFFF;border:1px solid var(--border);border-radius:16px;padding:32px;position:relative;overflow:hidden;transition:border-color .4s,box-shadow .4s,transform .45s cubic-bezier(.16,1,.3,1),background .3s;cursor:none}
+.bc::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(142,59,47,.08) 0%,transparent 55%);opacity:0;transition:opacity .4s;pointer-events:none}
+.bc:hover::after{opacity:1}
+.bc:hover{border-color:var(--accent-b);box-shadow:0 16px 48px rgba(142,59,47,.1);transform:translateY(-4px);background:var(--white)}
+.bc.feat{background:var(--black);border-color:transparent}
+.bc.feat .sn{color:var(--white)}.bc.feat .sd{color:rgba(255,255,255,.5)}.bc.feat .pi{color:rgba(255,255,255,.4);border-color:rgba(255,255,255,.07)}.bc.feat:hover{background:var(--black2)}
+.b1{grid-column:span 7}.b2{grid-column:span 5}
+.b3{grid-column:span 4}.b4{grid-column:span 4}.b5{grid-column:span 4}
+.b6{grid-column:span 6}.b7{grid-column:span 6}
+.si{width:50px;height:50px;background:var(--accent-l);border:1px solid var(--accent-b);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:18px;transition:background .3s,transform .3s}
+.bc.feat .si{background:rgba(142,59,47,.15);border-color:rgba(142,59,47,.3)}
+.bc:hover .si{background:var(--accent-m);transform:scale(1.07)}
+.sn{font-family:'Playfair Display',serif;font-size:20px;font-weight:800;color:var(--black);margin-bottom:10px}
+.bc.feat .sn{font-size:23px}
+.sd{font-size:14px;color:var(--muted);line-height:1.7}
+.st{display:inline-block;margin-top:14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--accent);font-weight:700}
+.pi{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--border)}
+.pi:last-child{border-bottom:none}
+.pi .pr{color:var(--accent);font-weight:700;font-family:'Playfair Display',serif}
+.sfl{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.sfl li{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:10px}
+.sfl li::before{content:'';width:16px;height:1.5px;background:var(--accent);flex-shrink:0}
+
+/* ─── GALLERY ─── */
+.gal-section{background:var(--white)}
+.gal-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:20px}
+.masonry{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+.m-item{
+  position:relative;overflow:hidden;cursor:none;border-radius:14px;
+  background:var(--border);
+  height:300px;
+}
+/* Alternate heights for editorial feel without gaps */
+.m-item:nth-child(3n+2){height:380px}
+.m-item img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:transform .6s cubic-bezier(.4,0,.2,1);
+}
+.m-item:hover img{transform:scale(1.06)}
+.m-ov{position:absolute;inset:0;background:rgba(28,28,28,0);display:flex;align-items:flex-end;justify-content:flex-start;padding:20px;opacity:0;transition:opacity .35s,background .35s;border-radius:14px}
+.m-item:hover .m-ov{opacity:1;background:rgba(28,28,28,.38)}
+.m-ov span{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#fff;font-weight:600;padding:7px 16px;border:1px solid rgba(255,255,255,.45);border-radius:100px;backdrop-filter:blur(6px)}
+
+/* ─── LIGHTBOX ─── */
+#lb{position:fixed;inset:0;background:rgba(0,0,0,.95);z-index:9500;display:none;align-items:center;justify-content:center;padding:20px}
+#lb.open{display:flex}
+#lb img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px;animation:lbIn .3s ease}
+@keyframes lbIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+.lb-x{position:absolute;top:24px;right:28px;font-size:26px;color:#fff;cursor:pointer;background:none;border:none;opacity:.7;transition:opacity .2s}
+.lb-x:hover{opacity:1}
+.lb-nav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.1);color:#fff;border:none;cursor:pointer;width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:22px;transition:background .2s;border-radius:50%}
+.lb-nav:hover{background:rgba(142,59,47,.5)}
+#lb-prev{left:20px}#lb-next{right:20px}
+
+/* ─── PROCESS ─── */
+.proc-sec{background:var(--black);padding:100px 6%;position:relative;overflow:hidden}
+.proc-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(142,59,47,.08),transparent 60%),radial-gradient(ellipse at 80% 50%,rgba(142,59,47,.06),transparent 60%);pointer-events:none}
+.proc-sec .stag{color:var(--accent)}
+.proc-sec .stitle{color:var(--white)}
+.proc-sec .ssub{color:rgba(255,255,255,.38)}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:64px;position:relative}
+.proc-grid::before{content:'';position:absolute;top:52px;left:12.5%;right:12.5%;height:1px;background:linear-gradient(90deg,transparent,rgba(142,59,47,.5),rgba(142,59,47,.5),rgba(142,59,47,.5),transparent)}
+.proc-step{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 20px;position:relative;z-index:1}
+.proc-icon{width:104px;height:104px;border-radius:50%;background:rgba(255,255,255,.03);border:1.5px solid rgba(142,59,47,.35);display:flex;align-items:center;justify-content:center;margin-bottom:24px;position:relative;transition:border-color .4s,background .4s,transform .4s,box-shadow .4s}
+.proc-icon::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(142,59,47,.12);animation:orbit 6s linear infinite}
+.proc-step:nth-child(2) .proc-icon::before{animation-delay:-1.5s}
+.proc-step:nth-child(3) .proc-icon::before{animation-delay:-3s}
+.proc-step:nth-child(4) .proc-icon::before{animation-delay:-4.5s}
+@keyframes orbit{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.proc-icon:hover{border-color:var(--accent);background:rgba(142,59,47,.08);transform:translateY(-6px);box-shadow:0 20px 40px rgba(142,59,47,.2)}
+.proc-num{position:absolute;top:-10px;right:-4px;width:28px;height:28px;background:var(--accent);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--white);font-family:'Playfair Display',serif}
+.proc-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:800;color:var(--white);margin-bottom:8px}
+.proc-desc{font-size:13px;color:rgba(255,255,255,.35);line-height:1.65}
+
+/* ─── ABOUT ─── */
+.about-wrap{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.about-img{position:relative;min-height:560px;overflow:hidden}
+.about-img img{width:100%;height:100%;object-fit:cover;transition:transform 8s ease}
+.about-img:hover img{transform:scale(1.04)}
+.about-img::after{content:'';position:absolute;inset:0;background:linear-gradient(160deg,transparent 60%,rgba(28,28,28,.28));pointer-events:none}
+.about-body{background:var(--black);padding:80px 8%;display:flex;flex-direction:column;justify-content:center}
+.about-body .stag{color:var(--accent)}
+.about-body .stitle{color:var(--white)}
+.about-body .ssub{color:rgba(255,255,255,.48);max-width:100%}
+.about-stats{display:flex;margin-top:48px;border-top:1px solid rgba(255,255,255,.08);padding-top:40px}
+.ast{flex:1;padding-right:28px;border-right:1px solid rgba(255,255,255,.08)}
+.ast:last-child{border-right:none;padding-right:0;padding-left:28px}
+.ast:not(:first-child):not(:last-child){padding-left:28px}
+.ast-num{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;color:var(--accent);line-height:1}
+.ast-lbl{font-size:12px;color:rgba(255,255,255,.32);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px;font-weight:600}
+
+/* ─── BOOKING ─── */
+.booking-sec{background:#FFFFFF}
+.booking-inner{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+.booking-form-wrap{position:relative}
+.form-group{margin-bottom:28px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.form-group label{
+  font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:12px;
+}
+.form-group input,.form-group select,.form-group textarea{
+  width:100%;background:transparent;border:none;
+  border-bottom:1.5px solid var(--border);
+  padding:14px 0;font-family:'Plus Jakarta Sans',sans-serif;
+  font-size:15px;color:var(--black);outline:none;
+  transition:border-color .35s ease;appearance:none;border-radius:0;
+}
+.form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
+.form-group textarea{resize:none;height:90px}
+.form-group input::placeholder,.form-group textarea::placeholder{color:var(--light)}
+.form-group select{
+  cursor:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B5F58' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 8px center;
+}
+/* Booking info panel */
+.booking-info-panel{
+  background:#FAF9F7;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:36px;
+  position:sticky;
+  top:100px;
+}
+.b-info-title{
+  font-family:'Playfair Display',serif;
+  font-size:28px;font-weight:900;color:var(--black);
+  margin-bottom:6px;line-height:1.15;
+}
+.b-info-sub{font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.6;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.amenities{list-style:none;display:flex;flex-direction:column;gap:10px;margin:0}
+.amenities li{
+  display:flex;align-items:center;gap:14px;font-size:14px;color:var(--muted);
+  padding:13px 16px;background:var(--white);border:1px solid var(--border);
+  border-radius:10px;transition:border-color .3s,transform .3s ease,box-shadow .3s;
+}
+.amenities li:hover{border-color:var(--accent-b);transform:translateX(4px);box-shadow:0 4px 16px rgba(142,59,47,.07)}
+.amenities li svg{flex-shrink:0;stroke:var(--accent);width:18px;height:18px}
+.cstrip{margin-top:28px;padding-top:24px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:10px}
+.cstrip a{font-size:14px;color:var(--black);text-decoration:none;display:flex;align-items:center;gap:10px;font-weight:500;transition:color .25s}
+.cstrip a:hover{color:var(--accent)}
+.cstrip a svg{stroke:var(--accent);flex-shrink:0;width:16px;height:16px}
+.btn-submit{
+  background:var(--black);color:var(--white);padding:16px 36px;border-radius:8px;
+  font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:10px;
+  min-height:52px;position:relative;overflow:hidden;transition:color .35s;
+  border:none;cursor:none;font-family:'Plus Jakarta Sans',sans-serif;margin-top:8px;
+}
+.btn-submit::before{content:'';position:absolute;inset:0;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .38s cubic-bezier(.4,0,.2,1)}
+.btn-submit>*{position:relative;z-index:1}
+.btn-submit .arr{transition:transform .3s}
+.btn-submit:hover::before{transform:scaleX(1)}
+.btn-submit:hover .arr{transform:translateX(5px)}
+
+/* ─── REVIEWS ─── */
+.rev-sec{background:#FFFFFF}
+.rev-overall{display:flex;align-items:center;gap:28px;padding:30px 38px;background:var(--black);border-radius:20px;margin-bottom:40px;flex-wrap:wrap;box-shadow:0 16px 48px rgba(28,28,28,.1)}
+.rev-score{font-family:'Playfair Display',serif;font-size:80px;font-weight:900;color:var(--accent);line-height:1;flex-shrink:0}
+.rev-stars{display:flex;gap:4px;margin-bottom:8px}
+.star{color:var(--accent);font-size:17px}
+.rev-sub{font-size:16px;color:rgba(255,255,255,.68);font-weight:500}
+.rev-count{font-size:13px;color:rgba(255,255,255,.32);margin-top:4px}
+.rev-badge{font-size:13px;color:var(--accent);font-weight:600;margin-top:8px}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev-card{background:var(--white);border:1px solid var(--border);border-radius:16px;padding:26px;transition:border-color .3s,transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s;display:flex;flex-direction:column}
+.rev-card:hover{border-color:var(--accent-b);transform:translateY(-4px);box-shadow:0 16px 48px rgba(142,59,47,.1)}
+.rv-stars{display:flex;gap:3px;margin-bottom:14px;flex-shrink:0}
+.rv-txt{font-size:14px;color:var(--black);line-height:1.75;margin-bottom:20px;font-style:italic;flex:1}
+.rv-auth{display:flex;align-items:center;gap:12px;flex-shrink:0;padding-top:16px;border-top:1px solid var(--border);margin-top:auto}
+.rv-av{width:40px;height:40px;background:var(--accent-l);border:1px solid var(--accent-b);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:800;font-size:16px;color:var(--accent);flex-shrink:0}
+.rv-inf strong{display:block;font-size:14px;color:var(--black);font-weight:600}
+.rv-inf span{font-size:12px;color:var(--muted)}
+
+/* ─── CTA ─── */
+.cta-sec{text-align:center;padding:120px 6%;background:var(--black);position:relative;overflow:hidden}
+.cta-sec::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:400px;background:radial-gradient(ellipse,rgba(142,59,47,.12),transparent 70%);pointer-events:none}
+.cta-sec .stag{justify-content:center}
+.cta-sec .stitle{color:var(--white)}
+.cta-sec .ssub{margin:0 auto 40px;color:rgba(255,255,255,.38)}
+.cta-btns{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}
+.btn-wa{background:#25D366;color:var(--white);padding:16px 32px;border-radius:6px;text-decoration:none;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;transition:all .3s;min-height:52px}
+.btn-wa:hover{background:#1EB85A;transform:translateY(-2px);box-shadow:0 10px 28px rgba(37,211,102,.28)}
+.btn-ring{background:transparent;border:1px solid rgba(255,255,255,.2);color:var(--white);padding:16px 32px;border-radius:6px;text-decoration:none;font-size:14px;font-weight:500;display:inline-flex;align-items:center;gap:8px;transition:all .3s;min-height:52px}
+.btn-ring:hover{border-color:var(--accent);background:rgba(142,59,47,.08)}
+
+/* ─── FOOTER ─── */
+footer{background:#100A06;border-top:1px solid rgba(255,255,255,.04);padding:60px 6% 32px}
+.f-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:44px;margin-bottom:44px}
+.f-desc{font-size:13px;color:rgba(255,255,255,.28);line-height:1.75;max-width:240px;margin-bottom:22px}
+.f-social{display:flex;gap:10px}
+.fsoc{width:34px;height:34px;border:1px solid rgba(255,255,255,.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;color:rgba(255,255,255,.28);text-decoration:none;transition:all .3s}
+.fsoc:hover{border-color:var(--accent);color:var(--accent)}
+.f-head{font-size:10px;font-weight:700;color:var(--white);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:18px}
+.f-links{display:flex;flex-direction:column;gap:10px}
+.f-links a,.f-links p{font-size:13px;color:rgba(255,255,255,.28);text-decoration:none;transition:color .2s}
+.f-links a:hover{color:rgba(255,255,255,.75)}
+.f-bot{display:flex;justify-content:space-between;align-items:center;padding-top:26px;border-top:1px solid rgba(255,255,255,.04);flex-wrap:wrap;gap:10px}
+.f-bot p{font-size:12px;color:rgba(255,255,255,.18)}
+.f-bot strong{color:rgba(255,255,255,.42)}
+
+/* ─── FLOAT DOCK ─── */
+.fdock{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column;gap:10px;z-index:190}
+.fbtn{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 4px 18px rgba(0,0,0,.18);transition:transform .3s,box-shadow .3s;cursor:none}
+.fbtn:hover{transform:scale(1.12)}
+.fwa{background:#25D366}
+.fwa:hover{box-shadow:0 8px 28px rgba(37,211,102,.38)}
+.fcall{background:var(--accent)}
+.fcall:hover{box-shadow:0 8px 28px rgba(142,59,47,.38)}
+.mob-sticky{display:none;position:fixed;bottom:0;left:0;right:0;z-index:180;padding:10px 14px;background:rgba(242,240,234,.96);backdrop-filter:blur(20px);border-top:1px solid var(--border);gap:10px}
+.mob-sticky a{flex:1;padding:13px;border-radius:8px;text-align:center;font-size:13px;font-weight:600;text-decoration:none;min-height:48px;display:flex;align-items:center;justify-content:center;gap:6px}
+.mwa{background:#25D366;color:white}
+.mbook{background:var(--accent);color:white}
+
+/* ─── SCROLL ANIMATIONS ─── */
+.fu{opacity:0;transform:translateY(38px);transition:opacity .78s cubic-bezier(.16,1,.3,1),transform .78s cubic-bezier(.16,1,.3,1)}
+.fu.v{opacity:1;transform:translateY(0)}
+.fl{opacity:0;transform:translateX(-38px);transition:opacity .78s cubic-bezier(.16,1,.3,1),transform .78s cubic-bezier(.16,1,.3,1)}
+.fl.v{opacity:1;transform:translateX(0)}
+.fr{opacity:0;transform:translateX(38px);transition:opacity .78s cubic-bezier(.16,1,.3,1),transform .78s cubic-bezier(.16,1,.3,1)}
+.fr.v{opacity:1;transform:translateX(0)}
+.si-anim{opacity:0;transform:scale(.93);transition:opacity .72s cubic-bezier(.16,1,.3,1),transform .72s cubic-bezier(.16,1,.3,1)}
+.si-anim.v{opacity:1;transform:scale(1)}
+.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}.d4{transition-delay:.32s}.d5{transition-delay:.40s}
+
+/* Continuous section shimmer on titles */
+@keyframes titleShimmer{0%{background-position:200% center}100%{background-position:-200% center}}
+.shimmer-title{background:linear-gradient(90deg,var(--black) 40%,var(--accent) 50%,var(--black) 60%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:titleShimmer 6s linear infinite}
+
+/* Hover float on cards */
+.hover-float{transition:transform .45s cubic-bezier(.16,1,.3,1),box-shadow .45s}
+.hover-float:hover{transform:translateY(-8px);box-shadow:0 28px 60px rgba(142,59,47,.12)}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1100px){
+  .b1,.b2{grid-column:span 12}.b3,.b4{grid-column:span 6}.b5{grid-column:span 12}.b6,.b7{grid-column:span 12}
+  .proc-grid{grid-template-columns:repeat(2,1fr);gap:40px}.proc-grid::before{display:none}
+  .sb-grid{grid-template-columns:repeat(2,1fr);gap:32px}.sb-item{border-right:none;border-bottom:1px solid rgba(255,255,255,.15);padding-bottom:20px}
+  .booking-inner{grid-template-columns:1fr;gap:48px}.f-grid{grid-template-columns:1fr 1fr}
+  .rev-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:768px){
+  .hero{grid-template-columns:1fr;padding:100px 5% 60px}.hero-right{display:none}
+  .nav-links{display:none}.hamburger{display:flex}
+  .b3,.b4,.b5,.b6,.b7{grid-column:span 12}
+  .about-wrap{grid-template-columns:1fr}.about-img{min-height:300px}
+  .masonry{grid-template-columns:repeat(2,1fr)}.m-item{height:240px}.m-item:nth-child(3n+2){height:300px}.f-grid{grid-template-columns:1fr}
+  .fdock{display:none}.mob-sticky{display:flex}
+  body{padding-bottom:72px}
+  section{padding:70px 5%}.proc-sec{padding:70px 5%}.booking-sec{padding:70px 5%}
+  .proc-grid{grid-template-columns:1fr;gap:28px}
+  .sb-grid{grid-template-columns:repeat(2,1fr)}
+  .rev-grid{grid-template-columns:1fr}.form-row{grid-template-columns:1fr}
+}
+@media(max-width:480px){.masonry{grid-template-columns:1fr}.m-item,.m-item:nth-child(3n+2){height:220px}.booking-info-panel{position:static}}
+</style>
+</head>
+<body>
+
+<!-- ── INTRO ── -->
+<div id="intro">
+  <div class="ic tl"></div><div class="ic tr"></div><div class="ic bl"></div><div class="ic br"></div>
+  <div style="position:absolute;inset:0;pointer-events:none">
+    <div class="il"></div><div class="il"></div><div class="il"></div>
+  </div>
+  <div class="intro-graphic">
+    <svg width="220" height="150" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs><filter id="gl"><feGaussianBlur stdDeviation="3" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+      <g filter="url(#gl)" style="transform-origin:110px 78px;animation:camP 3.2s ease-in-out infinite">
+        <rect x="38" y="44" width="144" height="88" rx="12" stroke="#8E3B2F" stroke-width="2.5" fill="rgba(142,59,47,.06)"/>
+        <rect x="72" y="28" width="52" height="20" rx="8" stroke="#8E3B2F" stroke-width="2" fill="rgba(142,59,47,.08)"/>
+        <circle cx="110" cy="88" r="28" stroke="#8E3B2F" stroke-width="2.5" fill="rgba(142,59,47,.08)"/>
+        <circle cx="110" cy="88" r="18" stroke="rgba(142,59,47,.5)" stroke-width="1.5" fill="rgba(142,59,47,.12)"/>
+        <circle cx="110" cy="88" r="7" fill="#8E3B2F" opacity=".7"/>
+        <circle cx="62" cy="57" r="5" stroke="rgba(142,59,47,.6)" stroke-width="1.5" fill="rgba(142,59,47,.15)"/>
+        <rect x="154" y="51" width="12" height="8" rx="2" fill="rgba(142,59,47,.45)"/>
+      </g>
+      <style>@keyframes camP{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}</style>
+      <path d="M98 76 Q107 70 116 76" stroke="rgba(255,255,255,.3)" stroke-width="2" fill="none" stroke-linecap="round" style="animation:shine 2.5s ease-in-out infinite"/>
+      <style>@keyframes shine{0%,100%{opacity:.3}50%{opacity:.65}}</style>
+      <g style="animation:sp 2s .3s ease-in-out infinite"><path d="M18 28 L19.5 22 L21 28 L27 29.5 L21 31 L19.5 37 L18 31 L12 29.5Z" fill="#8E3B2F" opacity=".7"/></g>
+      <g style="animation:sp 2.8s .8s ease-in-out infinite"><path d="M196 22 L197 18 L198 22 L202 23 L198 24 L197 28 L196 24 L192 23Z" fill="#8E3B2F" opacity=".5"/></g>
+      <g style="animation:sp 2.2s 1.2s ease-in-out infinite"><path d="M204 118 L205 114 L206 118 L210 119 L206 120 L205 124 L204 120 L200 119Z" fill="rgba(142,59,47,.5)"/></g>
+      <style>@keyframes sp{0%,100%{opacity:.7;transform:scale(1)}50%{opacity:1;transform:scale(1.3)}}</style>
+      <text x="110" y="14" fill="rgba(142,59,47,.55)" font-size="13" letter-spacing="5" text-anchor="middle" font-family="serif">★ ★ ★ ★ ★</text>
+    </svg>
+  </div>
+  <div class="intro-logo">Manch <span>Studio</span></div>
+  <div class="intro-tagline">Creative Studio · Pune</div>
+  <div class="intro-div"></div>
+  <div class="intro-sub">Photography · Podcast · Events · Production</div>
+  <div class="intro-bar"><div class="intro-bar-fill"></div></div>
+</div>
+
+<canvas id="pCanvas"></canvas>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cring"></div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#" class="logo">
+    <div class="logo-icon">M</div>
+    <div class="logo-text">Manch<span class="logo-sub">Creative Studio</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#services">Studio</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#process">Process</a>
+    <a href="#about">About</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#booking" class="nav-cta">Book Now</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mob-nav" id="mobNav">
+  <button class="mob-close" id="mobClose">✕</button>
+  <a href="#services" onclick="cm()">Studio</a>
+  <a href="#gallery" onclick="cm()">Gallery</a>
+  <a href="#process" onclick="cm()">Process</a>
+  <a href="#about" onclick="cm()">About</a>
+  <a href="#booking" onclick="cm()">Book Now</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-orb o1"></div>
+  <div class="hero-orb o2"></div>
+  <svg class="hdeco d1" width="64" height="64" viewBox="0 0 64 64"><rect x="8" y="18" width="48" height="34" rx="6" stroke="#8E3B2F" stroke-width="2" fill="none"/><circle cx="32" cy="35" r="10" stroke="#8E3B2F" stroke-width="2" fill="none"/><circle cx="32" cy="35" r="4" fill="#8E3B2F" opacity=".4"/><rect x="22" y="10" width="16" height="10" rx="4" stroke="#8E3B2F" stroke-width="1.5" fill="none"/></svg>
+  <svg class="hdeco d2" width="52" height="52" viewBox="0 0 52 52"><circle cx="26" cy="26" r="20" stroke="#8E3B2F" stroke-width="2" fill="none"/><circle cx="26" cy="26" r="12" stroke="rgba(142,59,47,.5)" stroke-width="1.5" fill="none"/><circle cx="26" cy="26" r="5" fill="#8E3B2F" opacity=".45"/></svg>
+  <svg class="hdeco d3" width="40" height="40" viewBox="0 0 40 40"><path d="M8 20 L16 8 L24 14 L32 6 L32 34 L8 34Z" stroke="#8E3B2F" stroke-width="1.5" fill="rgba(142,59,47,.07)"/></svg>
+  <div>
+    <div class="hero-badge fu">Premium Creative Studio · Pune</div>
+    <h1 class="fu d1">Your Vision,<br><em>Our Stage.</em></h1>
+    <p class="hero-sub fu d2">Where ideas find form. A premium studio space in the heart of Pune — crafted for photographers, creators, and brands who refuse to settle.</p>
+    <div class="hero-actions fu d3">
+      <a href="#booking" class="btn-primary"><span>Reserve the Studio</span><span class="arr">→</span></a>
+      <a href="#gallery" class="btn-secondary">View Gallery ↓</a>
+    </div>
+    <div class="hero-stats fu d4">
+      <div><div class="stat-num">400+</div><div class="stat-label">Sessions Hosted</div></div>
+      <div><div class="stat-num">120+</div><div class="stat-label">Brands Served</div></div>
+      <div><div class="stat-num">5</div><div class="stat-label">Studio Bays</div></div>
+    </div>
+  </div>
+  <div class="hero-right si-anim d2">
+    <div class="hero-visual">
+      <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=900&q=85&auto=format" alt="Manch Studio interior" loading="eager">
+      <div class="hero-tag">
+        <div class="hero-tag-icon">📸</div>
+        <div class="hero-tag-text">
+          <strong>2,400 sq ft Creative Space</strong>
+          <span>Cyclorama · Podcast Suite · Event Hall</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-float-badge">Book<br><small>TODAY</small></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <div class="mq-item"><span class="dot"></span><strong>Studio</strong>&nbsp;Rentals</div>
+    <div class="mq-item"><span class="dot"></span><strong>Podcast</strong>&nbsp;Suite</div>
+    <div class="mq-item"><span class="dot"></span><strong>Events</strong>&nbsp;& Production</div>
+    <div class="mq-item"><span class="dot"></span><strong>4K</strong>&nbsp;Video Ready</div>
+    <div class="mq-item"><span class="dot"></span><strong>Cyclorama</strong>&nbsp;Walls</div>
+    <div class="mq-item"><span class="dot"></span><strong>120+</strong>&nbsp;Brands Served</div>
+    <div class="mq-item"><span class="dot"></span>Koregaon Park,&nbsp;<strong>Pune</strong></div>
+    <div class="mq-item"><span class="dot"></span><strong>Hourly</strong>&nbsp;Bookings</div>
+    <div class="mq-item"><span class="dot"></span><strong>Studio</strong>&nbsp;Rentals</div>
+    <div class="mq-item"><span class="dot"></span><strong>Podcast</strong>&nbsp;Suite</div>
+    <div class="mq-item"><span class="dot"></span><strong>Events</strong>&nbsp;& Production</div>
+    <div class="mq-item"><span class="dot"></span><strong>4K</strong>&nbsp;Video Ready</div>
+    <div class="mq-item"><span class="dot"></span><strong>Cyclorama</strong>&nbsp;Walls</div>
+    <div class="mq-item"><span class="dot"></span><strong>120+</strong>&nbsp;Brands Served</div>
+    <div class="mq-item"><span class="dot"></span>Koregaon Park,&nbsp;<strong>Pune</strong></div>
+    <div class="mq-item"><span class="dot"></span><strong>Hourly</strong>&nbsp;Bookings</div>
+  </div>
+</div>
+
+<!-- STAT BAND -->
+<div class="wave-div" style="background:var(--black)"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,28 C240,56 480,0 720,28 C960,56 1200,0 1440,28 L1440,56 L0,56Z" fill="#FFFFFF"/></svg></div>
+<div class="stat-band">
+  <div class="sb-grid">
+    <div class="sb-item fu">
+      <div class="sb-val"><span class="sb-num" data-count="400">0</span><span class="sb-suffix">+</span></div>
+      <div class="sb-lbl">Sessions Hosted</div>
+    </div>
+    <div class="sb-item fu d1">
+      <div class="sb-val"><span class="sb-num" data-count="120">0</span><span class="sb-suffix">+</span></div>
+      <div class="sb-lbl">Brands Served</div>
+    </div>
+    <div class="sb-item fu d2">
+      <div class="sb-val"><span class="sb-num" data-count="2400">0</span><span class="sb-suffix">sqft</span></div>
+      <div class="sb-lbl">Studio Space</div>
+    </div>
+    <div class="sb-item fu d3">
+      <div class="sb-val"><span class="sb-num" data-count="5">0</span></div>
+      <div class="sb-lbl">Studio Bays</div>
+    </div>
+  </div>
+</div>
+<div class="wave-div" style="background:#FFFFFF"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,28 C240,0 480,56 720,28 C960,0 1200,56 1440,28 L1440,0 L0,0Z" fill="var(--accent)"/></svg></div>
+
+<!-- SERVICES -->
+<section id="services" style="background:#FFFFFF">
+  <div class="svc-head">
+    <div>
+      <div class="stag fu">What We Offer</div>
+      <h2 class="stitle fu d1">Three ways to use <span>the Stage</span></h2>
+    </div>
+    <p class="ssub fu d2">Every corner of Manch is designed to serve your creative intent — nothing more, nothing less.</p>
+  </div>
+  <div class="bento">
+    <div class="bc b1 feat fl">
+      <div class="si">📷</div>
+      <div class="sn">Studio Rental</div>
+      <p class="sd">Cyclorama walls, modular lighting rigs, and over 2,400 sq ft of calibrated space. Hourly or full-day bookings for photographers and videographers who demand excellence.</p>
+      <div style="margin-top:18px">
+        <div class="pi"><span>Half Day (4 hrs)</span><span class="pr">On Request</span></div>
+        <div class="pi"><span>Full Day (8 hrs)</span><span class="pr">On Request</span></div>
+        <div class="pi"><span>Two Days</span><span class="pr">On Request</span></div>
+      </div>
+      <div class="st">★ Most Booked</div>
+    </div>
+    <div class="bc b2 fr d1">
+      <div class="si">🎙️</div>
+      <div class="sn">Podcast Suite</div>
+      <p class="sd">Acoustic-treated booth, multi-mic setup, live monitoring, and a dedicated engineer on request. Built for creators who mean business.</p>
+      <div class="st">Book a Session →</div>
+    </div>
+    <div class="bc b3 fu">
+      <div class="si">🎬</div>
+      <div class="sn">Videography</div>
+      <p class="sd">4K-ready infrastructure with controlled lighting. Commercials, reels, short films — all produced in-house.</p>
+    </div>
+    <div class="bc b4 fu d1">
+      <div class="si">🎪</div>
+      <div class="sn">Events & Brand</div>
+      <p class="sd">Corporate launches, brand activations, fashion shows. Full crew coordination. 120+ guest capacity.</p>
+    </div>
+    <div class="bc b5 fu d2">
+      <div class="si">💄</div>
+      <div class="sn">Green Room</div>
+      <p class="sd">Fully equipped green room, professional makeup station, and client lounge — all included.</p>
+    </div>
+    <div class="bc b6 fu">
+      <div class="si">💡</div>
+      <div class="sn">Lighting & Grip</div>
+      <p class="sd">Modular lighting rigs, softboxes, strobes, and full grip equipment available.</p>
+      <ul class="sfl"><li>Professional grade Bowens</li><li>RGB LED panels</li><li>Continuous & strobe</li></ul>
+    </div>
+    <div class="bc b7 fu d1">
+      <div class="si">🎞️</div>
+      <div class="sn">Post Production</div>
+      <p class="sd">Colour grading, audio mixing, and editing suite available on-site. From shoot to final delivery under one roof.</p>
+      <div class="st">Enquire →</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="wave-div" style="background:#FFFFFF"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,20 C360,56 720,0 1080,40 C1260,56 1380,10 1440,28 L1440,56 L0,56Z" fill="#FFFFFF"/></svg></div>
+<section id="gallery" class="gal-section">
+  <div class="gal-head">
+    <div>
+      <div class="stag fu">The Work</div>
+      <h2 class="stitle fu d1">From the <span>Studio Floor</span></h2>
+    </div>
+    <p class="ssub fu d2" style="max-width:240px;text-align:right">Click any image to enlarge</p>
+  </div>
+  <div class="masonry" id="mGrid"></div>
+</section>
+
+<!-- PROCESS -->
+<div class="wave-div" style="background:#FFFFFF"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,40 C480,0 960,56 1440,20 L1440,56 L0,56Z" fill="var(--black)"/></svg></div>
+<section class="proc-sec" id="process">
+  <div style="text-align:center">
+    <div class="stag fu" style="justify-content:center">How It Works</div>
+    <h2 class="stitle fu d1" style="text-align:center">From Concept to <span>Capture</span></h2>
+    <p class="ssub fu d2" style="margin:0 auto;text-align:center">A seamless experience from inquiry to delivery. No guesswork — just great work.</p>
+  </div>
+  <div class="proc-grid">
+    <div class="proc-step fu">
+      <div class="proc-icon">
+        <div class="proc-num">01</div>
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" fill="rgba(142,59,47,.1)" stroke="rgba(142,59,47,.3)" stroke-width="1.5"/><rect x="14" y="12" width="14" height="22" rx="3.5" stroke="#8E3B2F" stroke-width="2" fill="none"/><circle cx="21" cy="31" r="2" fill="#8E3B2F"/><line x1="17" y1="16" x2="25" y2="16" stroke="rgba(142,59,47,.5)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="proc-title">Inquire</div>
+      <div class="proc-desc">Fill out the booking form or call us. We respond within 2 hours with availability and pricing.</div>
+    </div>
+    <div class="proc-step fu d1">
+      <div class="proc-icon">
+        <div class="proc-num">02</div>
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" fill="rgba(142,59,47,.1)" stroke="rgba(142,59,47,.3)" stroke-width="1.5"/><rect x="12" y="14" width="24" height="20" rx="3" stroke="#8E3B2F" stroke-width="2" fill="none"/><line x1="16" y1="20" x2="32" y2="20" stroke="rgba(142,59,47,.5)" stroke-width="1.5" stroke-linecap="round"/><line x1="16" y1="25" x2="26" y2="25" stroke="rgba(142,59,47,.4)" stroke-width="1.5" stroke-linecap="round"/><path d="M28 27 L31 30 L35 24" stroke="#8E3B2F" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+      </div>
+      <div class="proc-title">Confirm</div>
+      <div class="proc-desc">Book your slot with a 30% advance. We block your date and prepare the studio to your brief.</div>
+    </div>
+    <div class="proc-step fu d2">
+      <div class="proc-icon">
+        <div class="proc-num">03</div>
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" fill="rgba(142,59,47,.1)" stroke="rgba(142,59,47,.3)" stroke-width="1.5"/><rect x="11" y="16" width="26" height="18" rx="4" stroke="#8E3B2F" stroke-width="2" fill="none"/><circle cx="24" cy="25" r="6" stroke="#8E3B2F" stroke-width="2" fill="none"/><circle cx="24" cy="25" r="2.5" fill="#8E3B2F" opacity=".7"/><rect x="18" y="10" width="12" height="8" rx="3" stroke="rgba(142,59,47,.6)" stroke-width="1.5" fill="none"/></svg>
+      </div>
+      <div class="proc-title">Shoot</div>
+      <div class="proc-desc">Arrive, set up, and create. Our studio assistant is on hand to make everything run perfectly.</div>
+    </div>
+    <div class="proc-step fu d3">
+      <div class="proc-icon">
+        <div class="proc-num">04</div>
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="18" fill="rgba(142,59,47,.1)" stroke="rgba(142,59,47,.3)" stroke-width="1.5"/><path d="M24 14 L26.5 20 L33 20 L28 24.5 L30 31 L24 27 L18 31 L20 24.5 L15 20 L21.5 20Z" fill="#8E3B2F" opacity=".85"/></svg>
+      </div>
+      <div class="proc-title">Deliver</div>
+      <div class="proc-desc">Walk away with content that converts. Editing and post-production available on-site.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="wave-div" style="background:var(--black)"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,28 C360,0 720,56 1080,20 C1260,0 1380,40 1440,28 L1440,56 L0,56Z" fill="#FFFFFF"/></svg></div>
+<div id="about" class="about-wrap">
+  <div class="about-img fl">
+    <img src="https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=900&q=80&auto=format" alt="Manch Studio space" loading="lazy">
+  </div>
+  <div class="about-body">
+    <div class="stag fu">Our Story</div>
+    <h2 class="stitle fu d1">Born from a love of <span>making things</span></h2>
+    <p class="ssub fu d2" style="margin-bottom:16px">Manch began as a simple idea: Pune deserves a world-class creative studio. Not just the infrastructure — but the intent, the craft, and the care behind every session.</p>
+    <p class="ssub fu d3">We built Manch for the filmmaker who needs silence, the photographer who needs light, and the brand that needs to be believed.</p>
+    <div class="about-stats fu d4">
+      <div class="ast"><div class="ast-num">400+</div><div class="ast-lbl">Sessions Hosted</div></div>
+      <div class="ast"><div class="ast-num">120+</div><div class="ast-lbl">Brands Served</div></div>
+      <div class="ast"><div class="ast-num">5</div><div class="ast-lbl">Studio Bays</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- REVIEWS -->
+<div class="wave-div" style="background:#FFFFFF"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,20 C360,56 720,0 1080,40 C1260,56 1380,10 1440,28 L1440,0 L0,0Z" fill="var(--black)"/></svg></div>
+<section id="reviews" class="rev-sec">
+  <div class="stag fu">Client Stories</div>
+  <h2 class="stitle fu d1">What Our <span>Clients Say</span></h2>
+  <div style="margin-top:44px" class="fu d2">
+    <div class="rev-overall">
+      <div class="rev-score">4.9</div>
+      <div>
+        <div class="rev-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+        <p class="rev-sub">Exceptional rating across 80+ verified reviews</p>
+        <p class="rev-count">Verified on Google Business · Koregaon Park, Pune</p>
+        <p class="rev-badge">✦ Top-rated creative studio in Pune</p>
+      </div>
+    </div>
+  </div>
+  <div class="rev-grid">
+    <div class="rev-card fu hover-float"><div class="rv-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="rv-txt">"Manch is genuinely the best studio in Pune. The cyclorama is immaculate, the lighting is professional-grade, and the team is always two steps ahead."</p><div class="rv-auth"><div class="rv-av">A</div><div class="rv-inf"><strong>Aisha Sharma</strong><span>Fashion Photographer · 2 months ago</span></div></div></div>
+    <div class="rev-card fu d1 hover-float"><div class="rv-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="rv-txt">"We used Manch for our brand launch — 80+ guests, live streaming, full production crew. Not a single hiccup. The team's attention to detail is unmatched."</p><div class="rv-auth"><div class="rv-av">R</div><div class="rv-inf"><strong>Rahul Menon</strong><span>Brand Director · 1 month ago</span></div></div></div>
+    <div class="rev-card fu d2 hover-float"><div class="rv-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="rv-txt">"Recorded our podcast series here over 3 days. The acoustic booth is exceptional — zero sound bleed, crystal clear audio. The engineer was a game-changer."</p><div class="rv-auth"><div class="rv-av">S</div><div class="rv-inf"><strong>Sneha Kapoor</strong><span>Podcast Host · 3 weeks ago</span></div></div></div>
+    <div class="rev-card fu hover-float"><div class="rv-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="rv-txt">"Shot two commercial campaigns here. The modular set pieces and infinity cove gave us exactly the versatility we needed. Premium space, premium results."</p><div class="rv-auth"><div class="rv-av">V</div><div class="rv-inf"><strong>Vikram Nair</strong><span>Commercial Director · 5 weeks ago</span></div></div></div>
+    <div class="rev-card fu d1 hover-float"><div class="rv-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="rv-txt">"The green room and makeup station made coordinating our team shoot so seamless. Everyone was comfortable and the whole day ran like clockwork."</p><div class="rv-auth"><div class="rv-av">P</div><div class="rv-inf"><strong>Pooja Verma</strong><span>Creative Director · 2 months ago</span></div></div></div>
+    <div class="rev-card fu d2 hover-float"><div class="rv-stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="rv-txt">"Best studio in Pune without a doubt. Clean, professional, and the team genuinely cares about your output. Feels like a creative partnership."</p><div class="rv-auth"><div class="rv-av">K</div><div class="rv-inf"><strong>Kunal Shah</strong><span>Videographer · 1 month ago</span></div></div></div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<div class="wave-div" style="background:#FFFFFF"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,30 C360,56 720,0 1080,40 C1260,54 1380,14 1440,30 L1440,56 L0,56Z" fill="#FFFFFF"/></svg></div>
+<section id="booking" class="booking-sec">
+  <div class="stag fu">Reservations</div>
+  <h2 class="stitle fu d1">Book Your <span>Session</span></h2>
+  <p class="ssub fu d2" style="margin-bottom:52px">We respond within 2 hours. All bookings confirmed with a 30% advance.</p>
+  <div class="booking-inner">
+    <div>
+      <form onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group fu"><label>Your Name</label><input type="text" placeholder="Full name" required></div>
+          <div class="form-group fu d1"><label>Phone Number</label><input type="tel" placeholder="+91 00000 00000" required></div>
+        </div>
+        <div class="form-group fu"><label>Type of Shoot</label>
+          <select required><option value="" disabled selected>Select a category</option><option>Photography — Product</option><option>Photography — Fashion / Editorial</option><option>Photography — Portrait / Headshot</option><option>Videography — Commercial</option><option>Videography — Reel / Short Film</option><option>Podcast / Talk Show</option><option>Corporate Event</option><option>Brand Activation</option><option>Other</option></select>
+        </div>
+        <div class="form-row">
+          <div class="form-group fu d1"><label>Preferred Date</label><input type="date" required></div>
+          <div class="form-group fu d2"><label>Duration</label><select><option>Half day (4 hrs)</option><option>Full day (8 hrs)</option><option>Two days</option><option>Custom</option></select></div>
+        </div>
+        <div class="form-group fu"><label>Additional Notes</label><textarea placeholder="Tell us about your shoot — mood, references, crew size..."></textarea></div>
+        <button type="submit" id="submitBtn" class="btn-submit fu"><span>Send Request</span><span class="arr">→</span></button>
+      </form>
+    </div>
+    <div class="fr d1">
+      <div class="booking-info-panel">
+      <div class="b-info-title">What's Included</div>
+      <div class="b-info-sub">Every booking at Manch comes with the essentials — no hidden add-ons.</div>
+      <ul class="amenities">
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Flexible hourly or full-day rates</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/></svg>4K video-ready infrastructure</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Cyclorama, infinity cove & set pieces</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Green room, makeup station & lounge</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Dedicated studio assistant</li>
+        <li><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Modular lighting & grip equipment</li>
+      </ul>
+      <div class="cstrip">
+        <a href="tel:+919876543210"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l1.27-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>+91 98765 43210</a>
+        <a href="/cdn-cgi/l/email-protection#b4dcd1d8d8dbf4d9d5dad7dcc7c0c1d0dddb9addda"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span class="__cf_email__" data-cfemail="650d0009090a2508040b060d161110010c0a4b0c0b">[email&#160;protected]</span></a>
+        <a href="https://maps.google.com/?q=Koregaon+Park+Pune" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Koregaon Park, Pune, MH</a>
+      </div>
+      </div><!-- end booking-info-panel -->
+    </div>
+  </div>
+</section>
+<div class="wave-div" style="background:#FFFFFF"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,20 C360,56 720,0 1080,40 C1260,56 1380,10 1440,28 L1440,0 L0,0Z" fill="var(--black)"/></svg></div>
+<section class="cta-sec" style="position:relative">
+  <svg style="position:absolute;left:5%;top:20%;opacity:.05;animation:spinS 20s linear infinite;pointer-events:none" width="100" height="100" viewBox="0 0 100 100"><path d="M50 8 L57 34 L83 34 L62 52 L69 78 L50 62 L31 78 L38 52 L17 34 L43 34Z" fill="#8E3B2F"/></svg>
+  <svg style="position:absolute;right:5%;bottom:20%;opacity:.04;animation:spinS 28s linear infinite reverse;pointer-events:none" width="70" height="70" viewBox="0 0 70 70"><path d="M35 6 L40 24 L58 24 L44 34 L49 52 L35 42 L21 52 L26 34 L12 24 L30 24Z" fill="#8E3B2F"/></svg>
+  <style>@keyframes spinS{from{transform:rotate(0)}to{transform:rotate(360deg)}}</style>
+  <div class="stag fu" style="justify-content:center">Ready to Create?</div>
+  <h2 class="stitle fu d1" style="text-align:center">Reserve the Studio <span>Today</span></h2>
+  <p class="ssub fu d2" style="text-align:center;margin:0 auto 40px">Join 120+ brands and creators who trust Manch. Walk-ins welcome, bookings preferred.</p>
+  <div class="cta-btns fu d3">
+    <a href="https://wa.me/919876543210" target="_blank" class="btn-wa">💬 WhatsApp Us</a>
+    <a href="tel:+919876543210" class="btn-ring">📞 +91 98765 43210</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<div class="wave-div" style="background:var(--black)"><svg viewBox="0 0 1440 56" preserveAspectRatio="none"><path d="M0,28 C360,56 720,0 1080,40 C1260,54 1380,14 1440,28 L1440,56 L0,56Z" fill="#100A06"/></svg></div>
+<footer>
+  <div class="f-grid">
+    <div>
+      <div style="margin-bottom:14px"><a href="#" class="logo"><div class="logo-icon" style="background:var(--accent);color:var(--white)">M</div><div class="logo-text" style="color:rgba(255,255,255,.65)">Manch<span class="logo-sub" style="color:rgba(255,255,255,.28)">Creative Studio</span></div></a></div>
+      <p class="f-desc">A premium creative studio space in Pune. Built for those who make things that matter.</p>
+      <div class="f-social"><a href="#" class="fsoc">📸</a><a href="#" class="fsoc">▶</a><a href="#" class="fsoc">💬</a></div>
+    </div>
+    <div><div class="f-head">Studio</div><div class="f-links"><a href="#services">Studio Rentals</a><a href="#services">Podcast Suite</a><a href="#services">Events</a><a href="#gallery">Gallery</a></div></div>
+    <div><div class="f-head">Info</div><div class="f-links"><a href="#about">About Us</a><a href="#booking">Book Now</a><p>Mon – Sat: 7am – 10pm</p><p>Sun: On request</p></div></div>
+    <div><div class="f-head">Connect</div><div class="f-links"><a href="tel:+919876543210">+91 98765 43210</a><a href="/cdn-cgi/l/email-protection#cea6aba2a2a18ea3afa0ada6bdbabbaaa7a1e0a7a0"><span class="__cf_email__" data-cfemail="452d2029292a0528242b262d363130212c2a6b2c2b">[email&#160;protected]</span></a><a href="#">Instagram</a><a href="#">YouTube</a></div></div>
+  </div>
+  <div class="f-bot">
+    <p>© 2025 <strong>Manch Studio</strong>. All rights reserved. · Koregaon Park, Pune</p>
+    <p>Premium Creative Studio · Photography · Podcast · Events</p>
+  </div>
+</footer>
+
+<div class="fdock">
+  <a href="https://wa.me/919876543210" target="_blank" class="fbtn fwa">💬</a>
+  <a href="tel:+919876543210" class="fbtn fcall">📞</a>
+</div>
+<div class="mob-sticky">
+  <a href="https://wa.me/919876543210" class="mwa">💬 WhatsApp</a>
+  <a href="#booking" class="mbook">📅 Book Now</a>
+</div>
+
+<div id="lb" onclick="closeLb()">
+  <button class="lb-x" onclick="closeLb()">✕</button>
+  <button class="lb-nav" id="lb-prev" onclick="event.stopPropagation();navLb(-1)">‹</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-nav" id="lb-next" onclick="event.stopPropagation();navLb(1)">›</button>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── INTRO ─────────────────────────────────────────────────────────
+const introEl = document.getElementById('intro');
+setTimeout(() => introEl.classList.add('hide'), 3000);
+
+// ── CURSOR ────────────────────────────────────────────────────────
+const cur = document.getElementById('cursor'), cring = document.getElementById('cring');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.11;ry+=(my-ry)*.11;cring.style.left=rx+'px';cring.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a,button,.bc,.rev-card,.m-item,.proc-icon').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.classList.add('big');cring.classList.add('big')});
+  el.addEventListener('mouseleave',()=>{cur.classList.remove('big');cring.classList.remove('big')});
+});
+
+// ── PARTICLE CANVAS ───────────────────────────────────────────────
+const pc=document.getElementById('pCanvas'),pctx=pc.getContext('2d');
+let PW,PH,parts=[];
+function rszP(){PW=pc.width=window.innerWidth;PH=pc.height=window.innerHeight}
+rszP();window.addEventListener('resize',rszP);
+const SHAPES=['cam','circle','diamond','line'];
+function Part(){
+  this.reset=function(){
+    this.x=Math.random()*PW;this.y=PH+20;this.sz=7+Math.random()*10;
+    this.sy=.28+Math.random()*.5;this.sx=(Math.random()-.5)*.3;
+    this.rot=Math.random()*Math.PI*2;this.rs=(Math.random()-.5)*.012;
+    this.a=0;this.ma=.05+Math.random()*.07;
+    this.shape=SHAPES[Math.floor(Math.random()*SHAPES.length)];
+    this.life=0;this.ml=190+Math.random()*160;
+  };
+  this.reset();this.y=Math.random()*PH;this.a=Math.random()*this.ma;this.life=Math.random()*this.ml;
+}
+for(let i=0;i<30;i++)parts.push(new Part());
+function drawPart(p){
+  pctx.save();pctx.translate(p.x,p.y);pctx.rotate(p.rot);pctx.globalAlpha=p.a;
+  pctx.strokeStyle='#8E3B2F';pctx.fillStyle='#8E3B2F';pctx.lineWidth=1.2;
+  const s=p.sz;
+  if(p.shape==='cam'){pctx.strokeRect(-s*.6,-s*.4,s*1.2,s*.8);pctx.beginPath();pctx.arc(0,0,s*.28,0,Math.PI*2);pctx.stroke();}
+  else if(p.shape==='circle'){pctx.beginPath();pctx.arc(0,0,s*.5,0,Math.PI*2);pctx.stroke();pctx.beginPath();pctx.arc(0,0,s*.2,0,Math.PI*2);pctx.fill();}
+  else if(p.shape==='line'){for(let i=0;i<4;i++){pctx.beginPath();pctx.moveTo(-s+i*(s*.7),0);pctx.lineTo(-s+i*(s*.7),s);pctx.stroke();}}
+  else{pctx.beginPath();pctx.moveTo(0,-s*.7);pctx.lineTo(s*.5,0);pctx.lineTo(0,s*.7);pctx.lineTo(-s*.5,0);pctx.closePath();pctx.stroke();}
+  pctx.restore();
+}
+function animParts(){
+  pctx.clearRect(0,0,PW,PH);
+  for(let p of parts){
+    p.life++;p.x+=p.sx;p.y-=p.sy;p.rot+=p.rs;
+    if(p.life<30)p.a=Math.min(p.ma,p.a+p.ma/30);
+    if(p.life>p.ml-30)p.a=Math.max(0,p.a-p.ma/30);
+    if(p.life>=p.ml||p.y<-20)p.reset();
+    drawPart(p);
+  }
+  requestAnimationFrame(animParts);
+}
+animParts();
+
+// ── NAV ───────────────────────────────────────────────────────────
+const navEl=document.getElementById('navbar');
+window.addEventListener('scroll',()=>navEl.classList.toggle('scrolled',scrollY>60));
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobNav').classList.add('open'));
+document.getElementById('mobClose').addEventListener('click',()=>document.getElementById('mobNav').classList.remove('open'));
+function cm(){document.getElementById('mobNav').classList.remove('open')}
+
+// ── SCROLL ANIMATIONS ─────────────────────────────────────────────
+const sObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('v');sObs.unobserve(e.target)}});
+},{threshold:.08,rootMargin:'0px 0px -20px 0px'});
+document.querySelectorAll('.fu,.fl,.fr,.si-anim').forEach(el=>sObs.observe(el));
+
+// ── BENTO GLOW ────────────────────────────────────────────────────
+document.querySelectorAll('.bc').forEach(c=>{
+  c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');c.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%')});
+});
+
+// ── COUNTER ANIMATION ─────────────────────────────────────────────
+function animCount(el){
+  const t=parseInt(el.dataset.count);
+  const dur=1400,s0=performance.now();
+  (function up(now){const pct=Math.min((now-s0)/dur,1),ease=1-Math.pow(1-pct,3);el.textContent=Math.round(ease*t).toLocaleString();if(pct<1)requestAnimationFrame(up)})(performance.now());
+}
+new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.querySelectorAll('[data-count]').forEach(animCount)}});
+},{threshold:.5}).observe(document.querySelector('.stat-band'));
+
+// ── PROCESS HOVER ────────────────────────────────────────────────
+document.querySelectorAll('.proc-icon').forEach(w=>{
+  w.addEventListener('mouseenter',()=>w.style.transform='translateY(-8px) scale(1.06)');
+  w.addEventListener('mouseleave',()=>w.style.transform='');
+});
+
+// ── AMENITIES stagger ─────────────────────────────────────────────
+document.querySelectorAll('.amenities li').forEach((li,i)=>{
+  li.style.transitionDelay = (i * 0.05) + 's';
+});
+
+// ── GALLERY ──────────────────────────────────────────────────────
+const imgs=[
+  {src:'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&q=85&auto=format',alt:'Fashion shoot'},
+  {src:'https://images.unsplash.com/photo-1554080353-a576cf803bda?w=800&q=85&auto=format',alt:'Editorial shoot'},
+  {src:'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=85&auto=format',alt:'Corporate headshot'},
+  {src:'https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&q=85&auto=format',alt:'Studio interior'},
+  {src:'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&q=85&auto=format',alt:'Studio lighting'},
+  {src:'https://images.unsplash.com/photo-1467533003447-e295ff1b0435?w=800&q=85&auto=format',alt:'Portrait session'},
+  {src:'https://images.unsplash.com/photo-1533622597524-a1215e26c0a2?w=800&q=85&auto=format',alt:'Podcast recording'},
+  {src:'https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=800&q=85&auto=format',alt:'Product shoot'},
+  {src:'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=85&auto=format',alt:'Brand event'}
+];
+let lbIdx=0;
+(function buildGal(){
+  const g=document.getElementById('mGrid');
+  imgs.forEach((img,i)=>{
+    const d=document.createElement('div');
+    d.className='m-item fu';
+    d.style.transitionDelay=(i*.07)+'s';
+    d.innerHTML=`<img src="${img.src}" alt="${img.alt}" loading="lazy"><div class="m-ov"><span>View</span></div>`;
+    d.addEventListener('click',()=>openLb(i));
+    g.appendChild(d);
+    sObs.observe(d);
+  });
+})();
+function openLb(i){lbIdx=i;document.getElementById('lb-img').src=imgs[i].src.replace('w=600','w=1400');document.getElementById('lb').classList.add('open');document.body.style.overflow='hidden'}
+function closeLb(){document.getElementById('lb').classList.remove('open');document.body.style.overflow=''}
+function navLb(d){lbIdx=(lbIdx+d+imgs.length)%imgs.length;document.getElementById('lb-img').src=imgs[lbIdx].src.replace('w=600','w=1400')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();if(e.key==='ArrowRight')navLb(1);if(e.key==='ArrowLeft')navLb(-1)});
+
+// ── FORM ─────────────────────────────────────────────────────────
+function handleSubmit(e){
+  e.preventDefault();
+  const btn=document.getElementById('submitBtn');
+  btn.innerHTML='<span>Request Sent! ✓</span>';
+  btn.style.background='#25D366';
+  setTimeout(()=>{btn.innerHTML='<span>Send Request</span><span class="arr">→</span>';btn.style.background='';},3000);
+}
+</script>
+</body>
+</html>
